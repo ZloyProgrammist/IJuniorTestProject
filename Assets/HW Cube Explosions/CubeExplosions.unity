@@ -541,7 +541,7 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 9005220659476430821, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
   m_PrefabInstance: {fileID: 1579876538}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &658359855
+--- !u!114 &658359854
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -550,13 +550,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 658359849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87b464a09fbb8d84786646fc28f84838, type: 3}
+  m_Script: {fileID: 11500000, guid: 87d76b2c6e86ea24d96d5a6e2631c20f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _cubeLayer:
     serializedVersion: 2
     m_Bits: 64
-  _maxDistance: 100
+  _maxDistance: 50
   _camera: {fileID: 658359853}
 --- !u!1 &681333440
 GameObject:
@@ -1099,7 +1099,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 9005220659476430823, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 658359855}
+      addedObject: {fileID: 658359854}
   m_SourcePrefab: {fileID: 100100000, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
 --- !u!1 &1657224441
 GameObject:
@@ -1274,6 +1274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1864821964}
   - component: {fileID: 1864821963}
+  - component: {fileID: 1864821965}
   m_Layer: 0
   m_Name: Cube Spawner
   m_TagString: Untagged
@@ -1309,6 +1310,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1864821965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864821962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 217d6f8d82dc9ed439db77bdaff45529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clickReader: {fileID: 658359854}
+  _spawner: {fileID: 1864821963}
+  _minSpawnCount: 2
+  _maxSpawnCount: 6
+  _spawnScaleFactor: 0.5
+  _explotionForce: 5
+  _spawnOffset: 0.6
+  _chanceDecreaseDivider: 2
+  _hueMin: 0
+  _hueMax: 1
+  _saturationMin: 0.6
+  _saturationMax: 1
+  _valueMin: 0.6
+  _valueMax: 1
 --- !u!1001 &2000525466
 PrefabInstance:
   m_ObjectHideFlags: 0

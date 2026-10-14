@@ -1,10 +1,8 @@
 using System;
 using UnityEngine;
 
-public class CubeClickHandler : MonoBehaviour
+public class CubeClickReader : MonoBehaviour
 {
-    public static CubeClickHandler Instance { get; private set; }
-
     [SerializeField] private LayerMask _cubeLayer;
     [SerializeField] private float _maxDistance = 100f;
     [SerializeField] private Camera _camera;
@@ -13,13 +11,6 @@ public class CubeClickHandler : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-
         if (_camera == null)
         {
             _camera = Camera.main;
@@ -27,7 +18,7 @@ public class CubeClickHandler : MonoBehaviour
 
         if (_camera == null)
         {
-            Debug.LogError($"{nameof(CubeClickHandler)}: камера не найдена!");
+            Debug.LogError($"{nameof(CubeClickReader)}: камера не найдена!");
         }
     }
 
@@ -37,21 +28,13 @@ public class CubeClickHandler : MonoBehaviour
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-            if(Physics.Raycast(ray, out RaycastHit hit,_maxDistance, _cubeLayer))
+            if (Physics.Raycast(ray, out RaycastHit hit, _maxDistance, _cubeLayer))
             {
                 if (hit.collider.TryGetComponent<SplitableCube>(out var cube))
                 {
                     CubeClicked?.Invoke(cube);
                 }
             }
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if (Instance == this)
-        {
-            Instance = null;
         }
     }
 }
