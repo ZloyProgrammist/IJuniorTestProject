@@ -4,11 +4,9 @@ using Color = UnityEngine.Color;
 public class CubeSplitter : MonoBehaviour
 {
     [Header("Ссылки")]
-    [Header("Ссылки")]
-    [Header("Ссылки")]
-    [Header("Ссылки")]
     [SerializeField] private CubeClickReader _clickReader;
     [SerializeField] private CubeSpawner _spawner;
+    [SerializeField] private CubeExploder _exploder;
 
     [Header("Настройки разделения")]
     [SerializeField] private int _minSpawnCount = 2;
