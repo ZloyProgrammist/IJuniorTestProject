@@ -12,9 +12,13 @@ public class CubeSplitter : MonoBehaviour
     [SerializeField] private int _minSpawnCount = 2;
     [SerializeField] private int _maxSpawnCount = 6;
     [SerializeField] private float _spawnScaleFactor = 0.5f;
-    [SerializeField] private float _explotionForce = 5f;
     [SerializeField] private float _spawnOffset = 0.6f;
     [SerializeField, Min(1f)] private float _chanceDecreaseDivider = 2f;
+    [SerializeField] private float _splitForce = 5f;
+
+    [Header("Настройки взрыва")]
+    [SerializeField] private float _explosionRadius = 50;
+    [SerializeField] private float _explosionForce = 50f;
 
     [Header("Цвет нового куба (HSV)")]
     [SerializeField, Range(0f, 1f)] private float _hueMin = 0f;
@@ -36,6 +40,14 @@ public class CubeSplitter : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        if (_clickReader != null)
+        {
+            _clickReader.CubeClicked -= OnCubeClicked;
+        }
+    }
+
     private void OnCubeClicked(SplitableCube cube)
     {
         if (Random.value <= cube.SplitChance)
@@ -44,8 +56,10 @@ public class CubeSplitter : MonoBehaviour
         }
         else
         {
-            Destroy(cube.gameObject);
+            _exploder.Explode(cube, _explosionForce, _explosionRadius);
         }
+
+        Destroy(cube.gameObject);
     }
 
     private void Split(SplitableCube cube)
@@ -54,17 +68,16 @@ public class CubeSplitter : MonoBehaviour
 
         for (int i = 0; i < amountParts; i++)
         {
-            Vector3 direction = Random.onUnitSphere;
+            //Vector3 direction = Random.onUnitSphere;
+            Vector3 direction = transform.up;
             Vector3 spawnPosition = cube.transform.position + direction * (cube.Size * _spawnOffset);
             float newSize = cube.Size * _spawnScaleFactor;
             float newChance = cube.SplitChance / _chanceDecreaseDivider;
             Color newColor = GenerateRandomColor();
 
             var newCube = _spawner.Create(spawnPosition, newSize, newChance, newColor);
-            newCube.GetComponent<Rigidbody>().AddForce(direction * _explotionForce, ForceMode.Impulse);
+            newCube.GetComponent<Rigidbody>().AddForce(direction * _splitForce, ForceMode.Impulse);
         }
-
-        Destroy(cube.gameObject);
     }
 
     private Color GenerateRandomColor()
@@ -73,13 +86,5 @@ public class CubeSplitter : MonoBehaviour
             _hueMin, _hueMax,
             _saturationMin, _saturationMax,
             _valueMin, _valueMax);
-    }
-
-    private void OnDisable()
-    {
-        if (_clickReader != null)
-        {
-            _clickReader.CubeClicked -= OnCubeClicked;
-        }
     }
 }

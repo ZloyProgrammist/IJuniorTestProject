@@ -1275,6 +1275,7 @@ GameObject:
   - component: {fileID: 1864821964}
   - component: {fileID: 1864821963}
   - component: {fileID: 1864821965}
+  - component: {fileID: 1864821966}
   m_Layer: 0
   m_Name: Cube Spawner
   m_TagString: Untagged
@@ -1324,18 +1325,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _clickReader: {fileID: 658359854}
   _spawner: {fileID: 1864821963}
+  _exploder: {fileID: 1864821966}
   _minSpawnCount: 2
   _maxSpawnCount: 6
   _spawnScaleFactor: 0.5
-  _explotionForce: 5
   _spawnOffset: 0.6
   _chanceDecreaseDivider: 2
+  _splitForce: 5
+  _explosionRadius: 50
+  _explosionForce: 100
   _hueMin: 0
   _hueMax: 1
   _saturationMin: 0.6
   _saturationMax: 1
   _valueMin: 0.6
   _valueMax: 1
+--- !u!114 &1864821966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864821962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf531f5ae7df28449a873e2ac6d55fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _referenceSize: 1
+  _minSize: 0.05
 --- !u!1001 &2000525466
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1403,7 +1421,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: RotationSpeed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name

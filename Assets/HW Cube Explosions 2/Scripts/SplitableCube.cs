@@ -14,16 +14,16 @@ public class SplitableCube : MonoBehaviour
     public float Size => _size;
     public float SplitChance => _splitChance;
 
+    private void Awake()
+    {
+        _renderer = GetComponent<Renderer>();
+    }
+
     public void Initialize(float size, float splitChance, Color color)
     {
         _size = size;
         _splitChance = splitChance;
         _renderer.material.color = color;
         transform.localScale = Vector3.one * _size;
-    }
-    
-    private void Awake()
-    {
-        _renderer = GetComponent<Renderer>();
     }
 }
